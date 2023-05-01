@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Url Shortening</h1>
+
+<h4>Enter the Url</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+      <div>
+              Url : <input type="text" name="originalUrl" id="originalUrl">
+              <input type="submit" onclick="CreateShortUrl()">
+      </div>
+      <br />
+      <div >
+          <textarea disabled style="display:none" id="shortUrl"></textarea>
+      </div>
+    </div>
+</div>
+
+
+<script>
+    function CreateShortUrl(){
+        var orgUrl = $("#originalUrl").val();
+        $.ajax({
+      type: "POST",
+      url: "Url/CreateShortUrl",
+      data: {"data" : orgUrl},
+      success: function(msg) {
+        $("textarea#shortUrl").show();
+        $("textarea#shortUrl").val(msg);
+      }
+    });
+    }
+</script>
